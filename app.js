@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const admin = require("./rootes/admin");
 const path = require("path");
+const mongoose = require("mongoose");
 
 /**     Config
  *       Template Engine     */
@@ -25,6 +26,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 /**     Mongoose            */
+mongoose.Promise = global.Promise;
+mongoose
+  .connect("mongodb://localhost/blog")
+  .then(() => {
+    console.log("Conectado ao banco blog");
+  })
+  .catch((err) => {
+    console.log("Ocorreu um erro ao conectar ao banco Blog" + err);
+  });
 
 /**     Public              */
 app.use(express.static(path.join(__dirname, "public")));
