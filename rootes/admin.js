@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require("mongoose");
 require("../models/Categoria");
 const Categoria = mongoose.model("categorias");
+require("../models/Postagem");
+const Postagem = mongoose.model("postagens");
 
 router.get("/", (req, res) => {
   res.render("admin/index");
@@ -54,6 +56,7 @@ router.post("/categorias/nova", (req, res) => {
       nome: req.body.nome,
       slug: req.body.slug,
     };
+
     new Categoria(novaCategoria)
       .save()
       .then(() => {
@@ -129,6 +132,39 @@ router.get("/postagens/add", (req, res) => {
       req.flash("error_msg", "Ocorreu um erro ao buscar as categorias");
       res.redirect("/admin");
     });
+});
+
+router.post("/postagens/nova", (req, res) => {
+  const erros = [];
+
+  if (req.body.categoria == "0") {
+    erros.push({ texto: "Categoria Inválida" });
+  }
+
+  if (erros.length > 0) {
+    res.render("admin/addPostagem", { erros: erros });
+  } else {
+    const novaPostagem = {
+      titulo: req.body.titulo,
+      slug: req.body.slug,
+      descricao: req.body.descricao,
+      conteudo: req.body.conteudo,
+      categoria: req.body.categoria,
+    };
+    new Postagem(novaPostagem)
+      .save()
+      .then(() => {
+        req.flash("success_msg", "Postagem adicionada com sucesso!");
+        res.redirect("/admin/postagens");
+      })
+      .catch((err) => {
+        req.flash(
+          "error_msg",
+          "Ocorreu um erro ao salvar a postagem, tentar novamente"
+        );
+        res.redirect("/admin/postagens");
+      });
+  }
 });
 
 module.exports = router;
