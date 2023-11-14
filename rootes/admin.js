@@ -110,4 +110,16 @@ router.post("/categorias/editar", (req, res) => {
   });
 });
 
+router.post("/categorias/excluir", (req, res) => {
+  Categoria.deleteOne({ _id: req.body.id })
+    .then(() => {
+      req.flash("success_msg", "A categoria foi excluida com sucesso!");
+      res.redirect("/admin/categorias");
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao tentar excluir a categoria!");
+      res.redirect("/admin/categorias");
+    });
+});
+
 module.exports = router;

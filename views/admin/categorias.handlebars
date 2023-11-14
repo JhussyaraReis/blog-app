@@ -1,8 +1,9 @@
 <h2>Lista de Categorias:</h2>
 <hr />
-<a href="/admin/categorias/add"><button class="btn btn-success">Adicionar
-    Categorias</button></a>
-
+<div class="col-lg-12" style="text-align: right;">
+  <a href="/admin/categorias/add"><button class="btn btn-success">Adicionar
+      Categorias</button></a>
+</div>
 {{#each categorias}}
   <div class="card mt-4">
     <div class="card-body">
@@ -10,9 +11,13 @@
       <small>Slug: {{slug}}</small>
       <br />
       <small>Data: {{data}}</small>
-      <div class="col-lg-12" style="text-align: right;">
+      <div style=" display: flex; justify-content: flex-end; gap: 20px">
         <a href="/admin/categorias/editar/{{_id}}">
           <button class="btn btn-outline-success">Editar</button></a>
+        <form action="/admin/categorias/excluir" method="POST">
+          <input type="hidden" name="id" value="{{_id}}" />
+          <button type="submit" class="btn btn-outline-danger">Excluir</button>
+        </form>
       </div>
     </div>
   </div>
