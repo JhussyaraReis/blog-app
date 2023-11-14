@@ -15,7 +15,15 @@ router.get("/posts", (req, res) => {
 });
 
 router.get("/categorias", (req, res) => {
-  res.render("admin/categorias");
+  Categoria.find()
+    .sort({ data: "desc" })
+    .then((categorias) => {
+      res.render("admin/categorias", { categorias: categorias });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao listar as categorias!");
+      res.redirect("admin");
+    });
 });
 
 router.get("/categorias/add", (req, res) => {
@@ -66,6 +74,40 @@ router.post("/categorias/nova", (req, res) => {
         res.redirect("/admin");
       });
   }
+});
+
+router.get("/categorias/editar/:id", (req, res) => {
+  Categoria.findOne({ _id: req.params.id })
+    .then((categoria) => {
+      res.render("admin/editarCategoria", { categoria: categoria });
+    })
+    .catch((err) => {
+      req.flash(
+        "error_msg",
+        "Ocorreu um erro ao localizar a categoria, tentar novamente"
+      );
+    });
+});
+
+router.post("/categorias/editar", (req, res) => {
+  Categoria.findOne({ _id: req.body.id }).then((categoria) => {
+    categoria.nome = req.body.nome;
+    categoria.slug = req.body.slug;
+
+    categoria
+      .save()
+      .then(() => {
+        req.flash("success_msg", "A categoria foi alterada com sucesso!");
+        res.redirect("/admin/categorias");
+      })
+      .catch((err) => {
+        req.flash(
+          "error_msg",
+          "Ocorreu um erro ao alterar a categoria, tente novamente!"
+        );
+        res.redirect("/admin/categorias");
+      });
+  });
 });
 
 module.exports = router;

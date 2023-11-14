@@ -2,3 +2,20 @@
 <hr />
 <a href="/admin/categorias/add"><button class="btn btn-success">Adicionar
     Categorias</button></a>
+
+{{#each categorias}}
+  <div class="card mt-4">
+    <div class="card-body">
+      <h4>{{nome}}</h4>
+      <small>Slug: {{slug}}</small>
+      <br />
+      <small>Data: {{data}}</small>
+      <div class="col-lg-12" style="text-align: right;">
+        <a href="/admin/categorias/editar/{{_id}}">
+          <button class="btn btn-outline-success">Editar</button></a>
+      </div>
+    </div>
+  </div>
+{{else}}
+
+{{/each}}
