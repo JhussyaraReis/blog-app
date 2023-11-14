@@ -1,7 +1,5 @@
 const express = require("express");
-
 const router = express.Router();
-
 const mongoose = require("mongoose");
 require("../models/Categoria");
 const Categoria = mongoose.model("categorias");
@@ -119,7 +117,18 @@ router.post("/categorias/excluir", (req, res) => {
 });
 
 router.get("/postagens", (req, res) => {
-  res.send("Página de Posts");
+  res.render("admin/postagens");
+});
+
+router.get("/postagens/add", (req, res) => {
+  Categoria.find()
+    .then((categoria) => {
+      res.render("admin/addPostagem", { categoria: categoria });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao buscar as categorias");
+      res.redirect("/admin");
+    });
 });
 
 module.exports = router;
