@@ -10,10 +10,6 @@ router.get("/", (req, res) => {
   res.render("admin/index");
 });
 
-router.get("/posts", (req, res) => {
-  res.send("Página de Posts");
-});
-
 router.get("/categorias", (req, res) => {
   Categoria.find()
     .sort({ data: "desc" })
@@ -120,6 +116,10 @@ router.post("/categorias/excluir", (req, res) => {
       req.flash("error_msg", "Ocorreu um erro ao tentar excluir a categoria!");
       res.redirect("/admin/categorias");
     });
+});
+
+router.get("/postagens", (req, res) => {
+  res.send("Página de Posts");
 });
 
 module.exports = router;
