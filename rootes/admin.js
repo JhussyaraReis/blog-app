@@ -204,7 +204,7 @@ router.post("/postagens/editar", (req, res) => {
       /** Validar os campos */
       postagem.titulo = req.body.titulo;
       postagem.descricao = req.body.descricao;
-      postagem.slug = req.body.descricao;
+      postagem.slug = req.body.slug;
       postagem.conteudo = req.body.conteudo;
       postagem.categoria = req.body.categoria;
 

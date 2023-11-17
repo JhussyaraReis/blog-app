@@ -75,6 +75,17 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get("/postagem/:slug", (req, res) => {
+  Postagem.findOne({ slug: req.params.slug })
+    .then((postagem) => {
+      res.render("postagem/index", { postagem: postagem });
+    })
+    .catch(() => {
+      req.flash("error_msg", "Ocorreu um erro ao localizar a postagem");
+      res.redirect("index");
+    });
+});
+
 app.get("/404", (req, res) => {
   res.send("Erro Interno.. A aplicação não está funcionando corretamente");
 });
