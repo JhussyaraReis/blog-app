@@ -4,3 +4,20 @@
   <a href="/admin/postagens/add"><button class="btn btn-success">Adicionar
       Postagem</button></a>
 </div>
+
+{{#each postagem}}
+  <div class="card mt-4">
+    <div class="card-body">
+      <h4>{{titulo}}</h4>
+      <small>{{descricao}}</small>
+      <small>{{categoria.nome}}</small>
+      <small>{{data}}</small>
+      <p>{{conteudo}}</p>
+    </div>
+  </div>
+
+{{else}}
+
+  <h5>Não existem postagens cadastradas</h5>
+
+{{/each}}

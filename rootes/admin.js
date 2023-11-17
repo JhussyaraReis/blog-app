@@ -120,7 +120,16 @@ router.post("/categorias/excluir", (req, res) => {
 });
 
 router.get("/postagens", (req, res) => {
-  res.render("admin/postagens");
+  Postagem.find()
+    .populate("categoria")
+    .sort({ data: "desc" })
+    .then((postagem) => {
+      res.render("admin/postagens", { postagem: postagem });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao listar as postagens!");
+      res.redirect("admin");
+    });
 });
 
 router.get("/postagens/add", (req, res) => {
