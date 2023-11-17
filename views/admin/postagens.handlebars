@@ -4,9 +4,9 @@
   <a href="/admin/postagens/add"><button class="btn btn-success">Adicionar
       Postagem</button></a>
 </div>
-
+<br />
 {{#each postagem}}
-  <div class="card mt-4">
+  <div class="card">
     <div class="card-body">
       <div style=" display: flex; justify-content: flex-end; gap: 20px">
         <small>{{categoria.nome}}</small>
@@ -26,6 +26,7 @@
       </div>
     </div>
   </div>
+  <br />
 
 {{else}}
 

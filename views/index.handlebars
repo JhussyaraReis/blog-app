@@ -1,0 +1,35 @@
+<div class="container py-4">
+  <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Bem Vindo ao Tecno Blog</h1>
+      <p class="col-md-8 fs-4">Lorem ipsum pharetra erat bibendum cras aenean
+        id, himenaeos magna est nostra lectus massa, feugiat dui rutrum taciti
+        eu ac. euismod fermentum laoreet lacus fames diam eget dolor quis
+        scelerisque lorem,
+      </p>
+      <button class="btn btn-primary btn-lg" type="button">Cadastre-se</button>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<h2>Postagens Recentes:</h2>
+
+<div style="display: flex; flex-wrap: wrap; gap:2rem">
+  {{#each postagem}}
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{titulo}}</h5>
+        <h6
+          class="card-subtitle mb-2 text-body-secondary"
+        >{{categoria.nome}}</h6>
+        <p class="card-text">{{descricao}}</p>
+        <a href="#" class="card-link">Continuar Lendo</a>
+      </div>
+    </div>
+  {{else}}
+    <h5>Não existem postagem recentes...</h5>
+  {{/each}}
+</div>
+<br />

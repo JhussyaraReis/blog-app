@@ -7,6 +7,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
+require("./models/Postagem");
+const Postagem = mongoose.model("postagens");
 
 /**     Config
  *        Session     */
@@ -60,9 +62,23 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /**     Rotas               */
 
-app.use("/", (req, res) => {
-  res.render("index");
+app.get("/", (req, res) => {
+  Postagem.find()
+    .populate("categoria")
+    .sort({ data: "desc" })
+    .then((postagem) => {
+      res.render("index", { postagem: postagem });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao listar as postagens");
+      res.redirect("/404");
+    });
 });
+
+app.get("/404", (req, res) => {
+  res.send("Erro Interno.. A aplicação não está funcionando corretamente");
+});
+
 app.use("/admin", admin);
 
 /**     Servidor            */

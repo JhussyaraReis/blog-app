@@ -6,6 +6,10 @@ const Categoria = mongoose.model("categorias");
 require("../models/Postagem");
 const Postagem = mongoose.model("postagens");
 
+router.get("/", (req, res) => {
+  res.send("Página princial admin");
+});
+
 router.get("/categorias", (req, res) => {
   Categoria.find()
     .sort({ data: "desc" })
