@@ -123,7 +123,7 @@ router.post("/categorias/excluir", (req, res) => {
 router.get("/postagens", (req, res) => {
   Postagem.find()
     .populate("categoria")
-    .sort({ data: "desc" })
+    .sort({ _id: "desc" })
     .then((postagem) => {
       res.render("admin/postagens", { postagem: postagem });
     })
