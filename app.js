@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 const admin = require("./rootes/admin");
+const usuario = require("./rootes/usuario");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -131,6 +132,8 @@ app.get("/categorias/:slug", (req, res) => {
 app.get("/404", (req, res) => {
   res.send("Erro Interno.. A aplicação não está funcionando corretamente");
 });
+
+app.use("/usuario", usuario);
 
 app.use("/admin", admin);
 
