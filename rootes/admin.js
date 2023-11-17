@@ -88,6 +88,7 @@ router.get("/categorias/editar/:id", (req, res) => {
 
 router.post("/categorias/editar", (req, res) => {
   Categoria.findOne({ _id: req.body.id }).then((categoria) => {
+    /** Validar os campos */
     categoria.nome = req.body.nome;
     categoria.slug = req.body.slug;
 
@@ -174,6 +175,54 @@ router.post("/postagens/nova", (req, res) => {
         res.redirect("/admin/postagens");
       });
   }
+});
+
+router.get("/postagens/editar/:id", (req, res) => {
+  Postagem.findOne({ _id: req.params.id })
+    .then((postagem) => {
+      Categoria.find()
+        .then((categoria) => {
+          res.render("admin/editarPostagem", {
+            categoria: categoria,
+            postagem: postagem,
+          });
+        })
+        .catch((err) => {
+          req.flash("error_msg", "Ocorreu um erro ao listar as categorias");
+          res.redirect("/admin/postagens");
+        });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao carregar o formulário");
+      res.redirect("/admin/postagens");
+    });
+});
+
+router.post("/postagens/editar", (req, res) => {
+  Postagem.findOne({ _id: req.body.id })
+    .then((postagem) => {
+      /** Validar os campos */
+      postagem.titulo = req.body.titulo;
+      postagem.descricao = req.body.descricao;
+      postagem.slug = req.body.descricao;
+      postagem.conteudo = req.body.conteudo;
+      postagem.categoria = req.body.categoria;
+
+      postagem
+        .save()
+        .then(() => {
+          req.flash("success_msg", "Postagem editada com sucesso!");
+          res.redirect("/admin/postagens");
+        })
+        .catch((err) => {
+          req.flash("error_msg", "Ocorreu um erro ao editar a postagem");
+          res.redirect("/admin/postagens");
+        });
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao editar a postagem");
+      res.redirect("/admin/postagens");
+    });
 });
 
 module.exports = router;
