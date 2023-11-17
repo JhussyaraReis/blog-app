@@ -8,11 +8,14 @@
 {{#each postagem}}
   <div class="card mt-4">
     <div class="card-body">
+      <div style=" display: flex; justify-content: flex-end; gap: 20px">
+        <small>{{categoria.nome}}</small>
+        |
+        <small>{{data}}</small>
+      </div>
       <h4>{{titulo}}</h4>
-      <small>{{descricao}}</small>
-      <small>{{categoria.nome}}</small>
-      <small>{{data}}</small>
-      <p>{{conteudo}}</p>
+      <h6>{{descricao}}</h6>
+      <p class="mt-4">{{conteudo}}</p>
       <div style=" display: flex; justify-content: flex-end; gap: 20px">
         <a href="/admin/postagens/editar/{{_id}}">
           <button class="btn btn-outline-success">Editar</button></a>

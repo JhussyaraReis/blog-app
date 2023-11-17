@@ -60,6 +60,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 /**     Rotas               */
 
+app.use("/", (req, res) => {
+  res.render("index");
+});
 app.use("/admin", admin);
 
 /**     Servidor            */

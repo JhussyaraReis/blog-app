@@ -6,10 +6,6 @@ const Categoria = mongoose.model("categorias");
 require("../models/Postagem");
 const Postagem = mongoose.model("postagens");
 
-router.get("/", (req, res) => {
-  res.render("admin/index");
-});
-
 router.get("/categorias", (req, res) => {
   Categoria.find()
     .sort({ data: "desc" })
@@ -221,6 +217,18 @@ router.post("/postagens/editar", (req, res) => {
     })
     .catch((err) => {
       req.flash("error_msg", "Ocorreu um erro ao editar a postagem");
+      res.redirect("/admin/postagens");
+    });
+});
+
+router.post("/postagens/excluir", (req, res) => {
+  Postagem.deleteOne({ _id: req.body.id })
+    .then(() => {
+      req.flash("success_msg", "Postagem exluída com sucesso!");
+      res.redirect("/admin/postagens");
+    })
+    .catch((err) => {
+      req.flash("error_msg", "Ocorreu um erro ao excluir a postagem!");
       res.redirect("/admin/postagens");
     });
 });
