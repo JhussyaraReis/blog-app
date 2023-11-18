@@ -8,11 +8,23 @@
     <h2>Adicionar Postagem</h2>
     <form action="/admin/postagens/nova" method="POST">
       <label for="titulo">Título</label>
-      <input type="text" class="form-control" name="titulo" id="titulo" />
+      <input
+        type="text"
+        class="form-control"
+        name="titulo"
+        id="titulo"
+        required
+      />
       <label for="slug"> Slug</label>
-      <input type="text" name="slug" id="slug" class="form-control" />
+      <input type="text" name="slug" id="slug" class="form-control" required />
       <label for="descricao">Descrição</label>
-      <input type="text" name="descricao" id="descricao" class="form-control" />
+      <input
+        type="text"
+        name="descricao"
+        id="descricao"
+        class="form-control"
+        required
+      />
       <label for="conteudo">Conteúdo</label>
       <textarea
         name="conteudo"
@@ -20,6 +32,7 @@
         cols="30"
         rows="10"
         class="form-control"
+        required
       ></textarea>
       <label for="categoria">Categoria</label>
       <select name="categoria" id="categoria" class="form-select">

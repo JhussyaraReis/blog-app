@@ -80,4 +80,8 @@ router.post("/registro", (req, res) => {
   }
 });
 
+router.get("/login", (req, res) => {
+  res.render("usuario/login");
+});
+
 module.exports = router;

@@ -7,7 +7,7 @@
   <div class="card-body">
     <h2>Editar Postagem</h2>
     <form action="/admin/postagens/editar" method="POST">
-      <input type="hidden" name="id" value="{{postagem._id}}" />
+      <input type="hidden" name="id" value="{{postagem._id}}" required />
       <label for="titulo">Título</label>
       <input
         type="text"
@@ -15,6 +15,7 @@
         name="titulo"
         id="titulo"
         value="{{postagem.titulo}}"
+        required
       />
       <label for="slug"> Slug</label>
       <input
@@ -23,6 +24,7 @@
         id="slug"
         class="form-control"
         value="{{postagem.slug}}"
+        required
       />
       <label for="descricao">Descrição</label>
       <input
@@ -31,6 +33,7 @@
         id="descricao"
         class="form-control"
         value="{{postagem.descricao}}"
+        required
       />
       <label for="conteudo">Conteúdo</label>
       <textarea
@@ -39,6 +42,7 @@
         cols="30"
         rows="10"
         class="form-control"
+        required
       >{{postagem.conteudo}}</textarea>
       <label for="categoria">Categoria</label>
       <select name="categoria" id="categoria" class="form-select">

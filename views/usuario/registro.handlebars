@@ -6,7 +6,7 @@
 
 <div class="card mb-3" style="max-width: 40%; margin:auto">
   <div class="card-body">
-    <h5 class="card-title">Inserir novo usuário</h5>
+    <h5 class="card-title">Registrar-se</h5>
     <form action="" method="post">
       <Label for="nome">Nome:</Label>
       <input
@@ -15,14 +15,16 @@
         id="nome"
         placeholder="Insira o nome"
         class="form-control"
+        required
       />
       <Label for="email">E-mail:</Label>
       <input
-        type="text"
+        type="email"
         name="email"
         id="email"
         placeholder="Insira o e-mail"
         class="form-control"
+        required
       />
       <Label for="senha">Senha:</Label>
       <input
@@ -31,6 +33,7 @@
         id="senha"
         placeholder="**************"
         class="form-control"
+        required
       />
       <Label for="senha2">Confirmar senha:</Label>
       <input
@@ -39,6 +42,7 @@
         id="senha2"
         placeholder="**************"
         class="form-control"
+        required
       />
       <div style="display: flex; justify-content:flex-end">
         <button type="submit" class="btn btn-success mt-4">Criar Conta</button>
